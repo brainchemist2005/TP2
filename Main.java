@@ -23,16 +23,65 @@ public class Main {
 	
 	public static String PermutationInterieure(int Cle, String Message)
 	{	
-		
+	
 		return "";
+	}
+	
+	public static String Inversion(String nbr,String Message)
+	{
+		int Max = Integer.parseInt(nbr);
+		String Str1 ,Str2, Str3 = "", Output = "";
+
+		if(Max >= Message.length() || Max == 1)
+			return Message;
+		
+		else
+		{
+			Str1 = Message.substring(0, Max);
+			
+			for (int i = Str1.length() - 1; i >= 0; i--) 
+			{
+			    Output += Str1.charAt(i);
+			}
+						
+			if(Max <= Message.length()/2)
+			{
+				Str2 = Message.substring(Max,Message.length()-Max);
+				Output += Str2;
+				
+				Str3 = Message.substring(Message.length()-Max,Message.length());
+				
+				for (int i = Str3.length() - 1; i >= 0; i--) 
+				{
+				    Output += Str3.charAt(i);
+				}
+			}
+			
+			else
+			{	
+				Str2 = Output + Message.substring(Max,Message.length());
+				
+				Str3 =  Str2.substring(Message.length()-Max,Message.length());
+				
+				Output = Output.substring(0,Message.length()-Max);
+				
+				for (int i = Str3.length() - 1; i >= 0; i--) 
+				{
+				    Output += Str3.charAt(i);
+				}
+				
+			}			
+				
+		}
+		
+		return Output;
 	}
 	
 	public static String RotationDroite(String nbr, String Message) // nbr est une variable qui designe le nombre de rotations
 	{	
-		int max = Integer.parseInt(nbr);
-		System.out.println(max);
+		int Max = Integer.parseInt(nbr);
 		
-		for(int i=0 ; i<max ; i++)
+		for(int i=0 ; i<Max ; i++)
 		{
 			for(int j=0 ; j<Message.length()-1 ; j++)
 				Message = swap(Message,j,Message.length()-1);
@@ -43,10 +92,9 @@ public class Main {
 	
 	public static String RotationGauche(String nbr,String Message)
 	{
-		int max = Integer.parseInt(nbr);
-		System.out.println(max);
+		int Max = Integer.parseInt(nbr);
 		
-		for(int i=0 ; i<max ; i++)
+		for(int i=0 ; i<Max ; i++)
 		{
 
 			for(int j=0 ; j<Message.length()-1 ; j++)
@@ -90,7 +138,7 @@ public class Main {
 			}
 			else if(Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V')
 			{
-				//Message = Inversion(Cle,Message);
+				Message = Inversion(Cle.substring(i+2,i+4),Message);
 			}
 			else if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'E')
 			{
@@ -162,3 +210,4 @@ public class Main {
 
 	
 }
+
