@@ -24,7 +24,6 @@ public class Main {
 	public static String PermutationExterieure(String nbr, String Message)
 	{	
 		int Max = Integer.parseInt(nbr);
-		String Output;
 		
 		if(Message.length() < 2)
 			return Message;
