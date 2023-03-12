@@ -21,10 +21,33 @@ public class Main {
             + str.substring(j + 1, str.length());
     }
 	
-	public static String PermutationInterieure(int Cle, String Message)
+	public static String PermutationExterieure(String nbr, String Message)
 	{	
-	
-		return "";
+		int Max = Integer.parseInt(nbr);
+		String Output;
+		
+		if(Message.length() < 2)
+			return Message;
+		
+		else 
+		{
+			for(int i=0,j=Message.length(),l=-1 ; i<Max ; i++)
+			{
+				l++;
+				j--;
+				
+				if(j == l || j-1 == l) 
+				{
+					l=0;
+					j=Message.length()-1;
+				}
+				
+				Message = swap(Message,l,j);
+
+			}
+		}
+		
+		return Message;
 	}
 	
 	public static String Inversion(String nbr,String Message)
@@ -134,7 +157,7 @@ public class Main {
 		{
 			if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'I')
 			{
-				//Message = PermutationInterieure(Cle,Message);
+				//Message = PermutationInterieure(Cle.substring(i+2,i+4),Message);
 			}
 			else if(Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V')
 			{
@@ -142,7 +165,7 @@ public class Main {
 			}
 			else if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'E')
 			{
-				//Message = PermutationExterieure(Cle,Message);
+				Message = PermutationExterieure(Cle.substring(i+2,i+4),Message);
 			}
 			else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'D')
 			{
