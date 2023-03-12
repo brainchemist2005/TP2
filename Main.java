@@ -41,6 +41,27 @@ public class Main {
 		return Message;
 	}
 	
+	public static String RotationGauche(String nbr,String Message)
+	{
+		int max = Integer.parseInt(nbr);
+		System.out.println(max);
+		
+		for(int i=0 ; i<max ; i++)
+		{
+
+			for(int j=0 ; j<Message.length()-1 ; j++)
+			{
+				if(j==0)
+					Message = swap(Message,j,Message.length()-1);
+				else
+					Message = swap(Message,j-1,j);
+			}
+			
+		}
+		
+		return Message;
+	}
+	
 	public static String cryptage()
 	{
 		int i = 0;
@@ -81,7 +102,7 @@ public class Main {
 			}
 			else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'G')
 			{
-				//Message = RotationGauche(Cle,Message);
+				Message = RotationGauche(Cle.substring(i+2,i+4),Message);
 			}
 			i = i + 4;
 		}
