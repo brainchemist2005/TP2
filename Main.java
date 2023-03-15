@@ -1,6 +1,14 @@
 
 /**
- * 
+ * Ce programme est un outil de cryptage puissant conçu pour assurer 
+ * la sécurité des messages. Avec seulement quelques étapes simples, vous pouvez crypter 
+ * n'importe quel message de votre choix à l'aide d'une clé de cryptage sécurisée de votre 
+ * choix. Il vous suffit d'entrer votre message et la clé de cryptage, et 
+ * le programme s'occupe du reste. Ce programme utilise des algorithmes 
+ * de cryptage inversions et permutations pour garantir que votre message est protégé des regards indiscrets,
+ * le rendant pratiquement impossible à décoder sans la clé. Avec la meme clé de cryptage vous pouvez decrypter votre message.
+ * Que vous cherchiez à envoyer des informations confidentielles ou simplement à garder vos messages privés.
+ *     
  * Code Permanent: BOUZ90340206
  * Courriel: fg591955@uqam.ca
  * @author Zakariae Bouargan
@@ -21,6 +29,79 @@ public class Main {
             + str.substring(j + 1, str.length());
     }
 	
+	public static String PermutationInterieure(String nbr, String Message)
+	{
+		int Max = Integer.parseInt(nbr),j, i;
+		
+		if(Message.length() < 2)
+			return Message;
+		
+		else
+		{
+			if(Message.length()%2 == 0)
+			{
+				i=((Message.length())/2)- 1;
+				j = i+1;
+			}
+			
+			/*else
+			{
+				i=((Message.length()-1)/2)-1;
+				j=i+2;
+			}*/
+			
+			else
+			{
+				i= Message.length()/2;
+				j=i;
+				i--;
+				j++;
+			}
+			
+				
+			
+			System.out.println(i +"hey"+ j );
+
+			for(int c=0; c<Max; c++,j++,i--)
+			{	
+				if(j == Message.length())
+				{
+					/*System.out.println(i +" hey "+ j + " "+ c);
+
+					i = Math.round(c / Message.length());
+					j = j - i - 1;
+					System.out.println(i +"hey"+ j );*/
+					
+					if(Message.length()%2 == 0)
+					{
+						i=((Message.length())/2)- 1;
+						j = i+1;
+					}
+					
+					else
+					{
+						i= Message.length()/2;
+						j=i;
+						i--;
+						j++;
+					}
+					
+					
+					
+				}
+				
+				System.out.println(i +"hey"+ j );
+				
+				Message = swap(Message,i,j);
+				System.out.println(Message);
+				
+				
+			}
+		}
+		
+		return Message;
+	}
+	
 	public static String PermutationExterieure(String nbr, String Message)
 	{	
 		int Max = Integer.parseInt(nbr);
@@ -34,7 +115,6 @@ public class Main {
 			{
 				l++;
 				j--;
-				
 				if(j == l || j-1 == l) 
 				{
 					l=0;
@@ -156,7 +236,7 @@ public class Main {
 		{
 			if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'I')
 			{
-				//Message = PermutationInterieure(Cle.substring(i+2,i+4),Message);
+				Message = PermutationInterieure(Cle.substring(i+2,i+4),Message);
 			}
 			else if(Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V')
 			{
