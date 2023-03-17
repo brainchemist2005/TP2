@@ -58,10 +58,6 @@ public class Main {
 				j++;
 			}
 			
-				
-			
-			System.out.println(i +"hey"+ j );
-
 			for(int c=0; c<Max; c++,j++,i--)
 			{	
 				if(j == Message.length())
@@ -74,8 +70,8 @@ public class Main {
 					
 					if(Message.length()%2 == 0)
 					{
-						i=((Message.length())/2)- 1;
-						j = i+1;
+						j=(Message.length())/2;
+						i = j-1;
 					}
 					
 					else
@@ -86,15 +82,9 @@ public class Main {
 						j++;
 					}
 					
-					
-					
 				}
-				
-				System.out.println(i +"hey"+ j );
-				
-				Message = swap(Message,i,j);
-				System.out.println(Message);
-				
+								
+				Message = swap(Message,i,j);				
 				
 			}
 		}
@@ -111,18 +101,31 @@ public class Main {
 		
 		else 
 		{
-			for(int i=0,j=Message.length(),l=-1 ; i<Max ; i++)
+			for(int i=0,j=Message.length()-1,l=0 ; i<Max ; i++)
 			{
+				System.out.println(l + " " + j);
+				Message = swap(Message,l,j);
+				System.out.print(Message +"\n");
+				
 				l++;
 				j--;
-				if(j == l || j-1 == l) 
+				
+				/*if(j == l) 
 				{
 					l=0;
 					j=Message.length()-1;
+					System.out.println(l + " Updated " + j);
 				}
+				else */
+				if(l == Message.length()/2)
+				{
+					l=0;
+					j=Message.length()-1;
+					System.out.println(l + " Updated " + j);
+				}
+					
 				
-				Message = swap(Message,l,j);
-
+				
 			}
 		}
 		
@@ -254,9 +257,15 @@ public class Main {
 			{
 				Message = RotationGauche(Cle.substring(i+2,i+4),Message);
 			}
+			
 			i = i + 4;
 		}
 		return Message;
+	}
+	
+	public static String decryptage()
+	{
+		return "";
 	}
 	
 	public static void menu()
@@ -273,7 +282,7 @@ public class Main {
 	public static void main(String[] args)
 	{
 		char choix;
-		String Message;
+		String Message ;
 		
 		System.out.println("Ce logiciel permet de crypter et de decrypter des messages secrets.\n"
 				+ "\n"
@@ -312,4 +321,3 @@ public class Main {
 
 	
 }
-
