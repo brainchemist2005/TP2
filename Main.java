@@ -18,6 +18,31 @@
 
 public class Main {
 	
+	public static int verification(String Cle)
+	{
+		int i =0;
+		
+		if(Cle.length() % 4 != 0)
+			return 0;
+		
+		else{
+			while(i<Cle.length())
+			{			
+				 if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'E' || Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'I' || Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V' || Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'G' || Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'D')
+					i = i+2;
+					
+				else if(Cle.charAt(i) <= '9' && Cle.charAt(i) >= '0' && Cle.charAt(i+1) <= '9' && Cle.charAt(i+1) >= '0')
+					i = i+2;
+				
+				else
+					return 0;
+			}
+		}
+		
+		return 1;
+		
+	}
+	
 	static String swap(String str, int i, int j)
     {
         if (j == str.length() - 1)
@@ -43,13 +68,7 @@ public class Main {
 				i=((Message.length())/2)- 1;
 				j = i+1;
 			}
-			
-			/*else
-			{
-				i=((Message.length()-1)/2)-1;
-				j=i+2;
-			}*/
-			
+						
 			else
 			{
 				i= Message.length()/2;
@@ -61,13 +80,7 @@ public class Main {
 			for(int c=0; c<Max; c++,j++,i--)
 			{	
 				if(j == Message.length())
-				{
-					/*System.out.println(i +" hey "+ j + " "+ c);
-
-					i = Math.round(c / Message.length());
-					j = j - i - 1;
-					System.out.println(i +"hey"+ j );*/
-					
+				{				
 					if(Message.length()%2 == 0)
 					{
 						j=(Message.length())/2;
@@ -110,13 +123,6 @@ public class Main {
 				l++;
 				j--;
 				
-				/*if(j == l) 
-				{
-					l=0;
-					j=Message.length()-1;
-					System.out.println(l + " Updated " + j);
-				}
-				else */
 				if(l == Message.length()/2)
 				{
 					l=0;
@@ -217,54 +223,80 @@ public class Main {
 	
 	public static String cryptage()
 	{
-		int i = 0;
-		String Cle,Message;
+		int i = 0, status = 0;
+		String Cle= "" ,Message;
 		
 		System.out.println("++++++++++++\n"
 				+ "+ CRYPTAGE +\n"
 				+ "++++++++++++");
 		
-		System.out.println("Cle DE CRYPTAGE : ");
-		Cle = Clavier.lireString();
-		Cle.toUpperCase();
 		
-		Message = Clavier.lireString();
 		
-		if(Cle.length()%4 != 0)
+		while(status != 1)
 		{
-			System.out.println("ERREUR, Cle invalide ! Recommencez...");
+			System.out.println("Cle DE CRYPTAGE : ");
+			Cle += Clavier.lireString();
+			Cle.toUpperCase();
+			
+			status = verification(Cle);
+		
+			
+			if(status == 0)
+			{
+				System.out.println("ERREUR, cle invalide ! Recommencez...");
+			}
+		
 		}
-		
-		while(i < Cle.length()-1)
-		{
-			if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'I')
+			
+			Message = Clavier.lireString();
+			
+			
+			while(i < Cle.length()-1)
 			{
-				Message = PermutationInterieure(Cle.substring(i+2,i+4),Message);
-			}
-			else if(Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V')
-			{
-				Message = Inversion(Cle.substring(i+2,i+4),Message);
-			}
-			else if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'E')
-			{
-				Message = PermutationExterieure(Cle.substring(i+2,i+4),Message);
-			}
-			else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'D')
-			{
-				Message = RotationDroite(Cle.substring(i+2,i+4),Message);			
-			}
-			else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'G')
-			{
-				Message = RotationGauche(Cle.substring(i+2,i+4),Message);
+				if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'I')
+				{
+					Message = PermutationInterieure(Cle.substring(i+2,i+4),Message);
+				}
+				else if(Cle.charAt(i) == 'I' && Cle.charAt(i+1) == 'V')
+				{
+					Message = Inversion(Cle.substring(i+2,i+4),Message);
+				}
+				else if(Cle.charAt(i) == 'P' && Cle.charAt(i+1) == 'E')
+				{
+					Message = PermutationExterieure(Cle.substring(i+2,i+4),Message);
+				}
+				else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'D')
+				{
+					Message = RotationDroite(Cle.substring(i+2,i+4),Message);	
+				}
+				else if(Cle.charAt(i) == 'R' && Cle.charAt(i+1) == 'G')
+				{
+					Message = RotationGauche(Cle.substring(i+2,i+4),Message);
+				}
+				
+				i = i + 4;
 			}
 			
-			i = i + 4;
-		}
 		return Message;
+	
+			
+			
 	}
 	
 	public static String decryptage()
 	{
+		String Message, Cle;
+		
+		System.out.println("++++++++++++++\n"
+				+ "+ DECRYPTAGE +\n"
+				+ "++++++++++++++");
+		
+		System.out.println("CLE DE CRYPTAGE : ");
+		Message = Clavier.lireString();
+		
+		
+		
+		
 		return "";
 	}
 	
@@ -303,7 +335,7 @@ public class Main {
 					break;
 					
 				case '2':
-					
+					Message = decryptage();	
 					break;
 					
 				case '3':
